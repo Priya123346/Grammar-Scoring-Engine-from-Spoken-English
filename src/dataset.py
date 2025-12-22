@@ -5,7 +5,8 @@ import torchaudio
 from torch.utils.data import Dataset
 
 class AudioDataset(Dataset):
-    def __init__(self,csv_path,audio_dir,max_len=16000*5):
+    def __init__(self,csv_path,audio_dir,max_len=16000*5,has_labels=True):
+        self.has_labels=has_labels
         self.df=pd.read_csv(csv_path)
         self.audio_dir=audio_dir
         self.max_len=max_len
@@ -13,7 +14,10 @@ class AudioDataset(Dataset):
         return len(self.df)
     def __getitem__(self,idx):
         row=self.df.iloc[idx]
-        audio_path=os.path.join(self.audio_dir,row["filename"])
+        filename = row["filename"]
+        if not filename.endswith(".wav"):
+            filename = filename + ".wav"
+        audio_path = os.path.join(self.audio_dir, filename)
         waveform,sr=torchaudio.load(audio_path)
 
         if sr!=16000:
@@ -23,6 +27,8 @@ class AudioDataset(Dataset):
             waveform=waveform[:self.max_len]
         else:
             waveform=torch.nn.functional.pad(waveform(0,self.max_len-waveform.size(0)))
+        if not self.has_labels:
+            return waveform
         label=torch.tensor(row["label"],dtype=torch.float)
         return waveform,label
 

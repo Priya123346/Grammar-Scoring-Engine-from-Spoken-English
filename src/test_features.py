@@ -1,8 +1,8 @@
 from dataset import AudioDataset
 from features import Wav2Vec2FeatureExtractor
 
-DATASET_CSV='data/dataset/train.csv'
-AUDIO_DIR='data/dataset/audios_train'
+DATASET_CSV='dataset/csvs/train.csv'
+AUDIO_DIR='dataset/audios/train_wav'
 
 dataset=AudioDataset(DATASET_CSV,AUDIO_DIR)
 feature_extractor=Wav2Vec2FeatureExtractor()

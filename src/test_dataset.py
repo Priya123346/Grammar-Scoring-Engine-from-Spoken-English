@@ -1,6 +1,6 @@
 from dataset import AudioDataset
-DATASET_CSV="data/dataset/train.csv"
-AUDIO_DIR="data/dataset/audios_train"
+DATASET_CSV="dataset/csvs/train.csv"
+AUDIO_DIR="dataset/audios/train_wav"
 dataset=AudioDataset(DATASET_CSV,AUDIO_DIR)
 print(f"Dataset size: {len(dataset)}")
 waveform,label=dataset[0]

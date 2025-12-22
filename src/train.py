@@ -8,8 +8,8 @@ from dataset import AudioDataset
 from features import Wav2Vec2FeatureExtractor
 from model import GrammarScorer
 #paths
-CSV_PATH= 'data/dataset/train.csv'
-AUDIO_DIR='data/dataset/audios_train'
+CSV_PATH= 'dataset/csvs/train.csv'
+AUDIO_DIR='dataset/audios/train_wav'
 #hyperparameters
 BATCH_SIZE=8
 EPOCHS=15
