@@ -40,7 +40,7 @@ def main():
             for wf in waveforms:
                 emb=feature_extractor.extract(wf)
                 embeddings.append(emb)
-            embeddings=torch.stack(embeddings).to(DEVICE)
+            embeddings=torch.stack(embeddings).to(DEVICE) #stack embeddings into a batch tensor to feed into model
             labels=labels.to(DEVICE)
 
             optimizer.zero_grad()

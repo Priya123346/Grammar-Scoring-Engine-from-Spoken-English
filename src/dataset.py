@@ -19,7 +19,7 @@ class AudioDataset(Dataset):
             filename = filename + ".wav"
         audio_path = os.path.join(self.audio_dir, filename)
         waveform,sr=torchaudio.load(audio_path)
-
+        #waveform represents (channels, samples),channels=1 for mono,2 for stereo which defines number of audio channels
         if sr!=16000:
             waveform=torchaudio.functional.resample(waveform,sr,16000)
         waveform=waveform.mean(dim=0)
